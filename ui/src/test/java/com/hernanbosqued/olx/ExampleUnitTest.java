@@ -1,4 +1,4 @@
-package olx.hernanbosqued.com.olx;
+package com.hernanbosqued.olx;
 
 import org.junit.Test;
 

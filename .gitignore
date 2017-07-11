@@ -7,3 +7,10 @@
 /build
 /captures
 .externalNativeBuild
+.idea/gradle.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+ui/src/main/gen/olx/hernanbosqued/com/olx/BuildConfig.java
+ui/src/main/gen/olx/hernanbosqued/com/olx/Manifest.java
+ui/src/main/gen/olx/hernanbosqued/com/olx/R.java

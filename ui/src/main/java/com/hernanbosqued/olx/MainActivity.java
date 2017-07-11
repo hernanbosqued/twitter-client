@@ -1,4 +1,4 @@
-package olx.hernanbosqued.com.olx;
+package com.hernanbosqued.olx;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
