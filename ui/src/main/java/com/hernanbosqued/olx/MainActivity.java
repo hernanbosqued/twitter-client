@@ -8,6 +8,8 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.hernanbosqued.olx.domain.Utils;
+
 public class MainActivity extends BaseFragmentActivity<MainFragment> implements MainFragment.Callbacks, SearchView.OnQueryTextListener {
 
     private SearchView searchView;
