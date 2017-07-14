@@ -13,8 +13,9 @@ public class MainPresenter extends BasePresenter<List<TwitterModel.StatusModel>,
 
     private TwitterService service;
     private boolean isLoading;
+    private boolean isEmpty;
 
-    MainPresenter( ) {
+    MainPresenter() {
         service = new TwitterService(TwitterRepositotyImpl.getInstance());
     }
 
@@ -30,6 +31,15 @@ public class MainPresenter extends BasePresenter<List<TwitterModel.StatusModel>,
         isLoading = false;
         setModel(statuses);
         view().hideProgress();
+
+        if (statuses.isEmpty()) {
+            isEmpty = true;
+            view().showEmpty();
+        } else {
+            isEmpty = false;
+            view().hideEmpty();
+            view().scrollToTop();
+        }
     }
 
     @Override
@@ -47,6 +57,9 @@ public class MainPresenter extends BasePresenter<List<TwitterModel.StatusModel>,
     @Override
     public void bindView(@NonNull MainContract.View view) {
         super.bindView(view);
+        if (isEmpty) {
+            view().showEmpty();
+        }
         if (isLoading) {
             view().showProgress();
         }

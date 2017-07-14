@@ -19,6 +19,8 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
     private ItemsAdapter adapter;
     private Dialog dialog;
     private MainPresenter presenter;
+    private View emptyView;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,10 +55,15 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
         super.onViewCreated(view, savedInstanceState);
         prepareRecyclerView(view);
         prepareDialog();
+        prepareEmptyView(view);
+    }
+
+    private void prepareEmptyView(View view) {
+        emptyView = view.findViewById(R.id.empty_view);
     }
 
     private void prepareRecyclerView(View view) {
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -93,6 +100,21 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
     @Override
     public void hideProgress() {
         dialog.dismiss();
+    }
+
+    @Override
+    public void showEmpty() {
+        emptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmpty() {
+        emptyView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void scrollToTop() {
+        recyclerView.smoothScrollToPosition(0);
     }
 
     @Override

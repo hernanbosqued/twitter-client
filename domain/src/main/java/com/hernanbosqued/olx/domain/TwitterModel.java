@@ -9,12 +9,18 @@ public class TwitterModel {
     public List<StatusModel> statuses;
 
     public static class StatusModel {
+
         @SerializedName("full_text")
         public String text;
+
         @SerializedName("user")
         public UserModel user;
+
         @SerializedName("entities")
         public EntitiesModel entities;
+
+        @SerializedName("extended_entities")
+        public ExtendedEntitiesModel extendedEntities;
 
         @SerializedName("display_text_range")
         public int[] displayTextRange;
@@ -22,6 +28,9 @@ public class TwitterModel {
         public static class UserModel {
             @SerializedName("screen_name")
             public String screenName;
+
+            @SerializedName("profile_image_url")
+            public String profileImageUrl;
         }
 
         public static class EntitiesModel {
@@ -39,23 +48,19 @@ public class TwitterModel {
                 public int[] indices;
             }
         }
+
+        public static class ExtendedEntitiesModel {
+
+            @SerializedName("media")
+            public List<MediaEntityModel> media;
+
+            public static class MediaEntityModel {
+                @SerializedName("media_url")
+                public String mediaUrl;
+
+                @SerializedName("type")
+                public String type;
+            }
+        }
     }
 }
-
-//"entities": {
-//        "urls": [
-//
-//        ],
-//        "hashtags": [
-//        {
-//        "text": "freebandnames",
-//        "indices": [
-//        20,
-//        34
-//        ]
-//        }
-//        ],
-//        "user_mentions": [
-//
-//        ]
-//        }

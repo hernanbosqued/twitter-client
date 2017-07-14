@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -12,7 +13,13 @@
     </style>
 
     <style name="itemStyle">
-        <item  name="android:textSize">@dimen/font_size</item>
-        <item  name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="emptyViewStyle">
+        <item name="android:textSize">@dimen/font_size</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

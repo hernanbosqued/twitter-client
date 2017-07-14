@@ -10,6 +10,9 @@ public class MainContract {
         void showMessage(String message);
         void showProgress();
         void hideProgress();
+        void showEmpty();
+        void hideEmpty();
+        void scrollToTop();
     }
 
     public interface Presenter {
