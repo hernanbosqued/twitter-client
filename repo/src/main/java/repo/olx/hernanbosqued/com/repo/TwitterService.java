@@ -18,6 +18,7 @@ public interface TwitterService {
     @POST("oauth2/token")
     Call<TokenModel> getToken(@Header("Authorization") String authorization, @Body RequestBody body);
 
-    @GET("1.1/search/tweets.json")
-    Call<TwitterModel> getTweets(@Header("Authorization") String authorization, @Query("q") String query);
+    @GET("1.1/search/tweets.json?tweet_mode=extended&count=100")
+    Call<TwitterModel> getTweets(@Header("Authorization") String authorization,
+                                 @Query("q") String query);
 }

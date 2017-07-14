@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin"
-    android:layout_marginBottom="@dimen/margin">
+    android:paddingTop="@dimen/margin8"
+    android:paddingBottom="@dimen/margin8"
+    android:paddingLeft="@dimen/margin5"
+    android:paddingRight="@dimen/margin5">
 
     <TextView
         android:id="@+id/title"
         style="@style/itemStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="@string/app_name"/>
 
 
 </android.support.constraint.ConstraintLayout>

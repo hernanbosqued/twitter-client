@@ -55,15 +55,17 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
         prepareDialog();
     }
 
-    private void prepareRecyclerView( View view){
+    private void prepareRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
         adapter = new ItemsAdapter();
         recyclerView.setAdapter(adapter);
     }
-    private void prepareDialog(){
+
+    private void prepareDialog() {
         dialog = new Dialog(getActivity(), R.style.TransparentDialog);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.progress_dialog);

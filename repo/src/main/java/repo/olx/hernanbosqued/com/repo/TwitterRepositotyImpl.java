@@ -42,7 +42,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
         return Base64.encodeToString(encodedCredential, Base64.NO_WRAP);
     }
 
-    public interface TokenCallback{
+    public interface TokenCallback {
         void onSession(String token);
     }
 
@@ -51,7 +51,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
         service.getToken(Constants.TOKEN_AUTH_PREFIX + getEncodedCredential(), requestBody).enqueue(new Callback<TokenModel>() {
             @Override
             public void onResponse(@NonNull Call<TokenModel> call, @NonNull Response<TokenModel> response) {
-                new ResponseHelper<TokenModel>( ).processResponse(response, callback);
+                new ResponseHelper<TokenModel>().processResponse(response, callback);
             }
 
             @Override
@@ -64,7 +64,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
     private void askForToken(final TokenCallback tokenCallback, final ModelCallbacks<?> modelCallback) {
         if (token != null) {
             tokenCallback.onSession(token.access_token);
-        }else{
+        } else {
             getToken(new ModelCallbacks<TokenModel>() {
                 @Override
                 public void onSuccess(TokenModel token) {
@@ -88,7 +88,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
                 service.getTweets(AUTH_PREFIX + token, query).enqueue(new Callback<TwitterModel>() {
                     @Override
                     public void onResponse(@NonNull Call<TwitterModel> call, @NonNull Response<TwitterModel> response) {
-                        new ResponseHelper<TwitterModel>( ).processResponse(response, callback);
+                        new ResponseHelper<TwitterModel>().processResponse(response, callback);
                     }
 
                     @Override
@@ -97,6 +97,6 @@ public class TwitterRepositotyImpl implements TwitterRepository {
                     }
                 });
             }
-        },callback);
+        }, callback);
     }
 }
