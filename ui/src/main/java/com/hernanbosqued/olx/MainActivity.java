@@ -7,6 +7,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.hernanbosqued.olx.domain.Utils;
 
@@ -42,8 +43,13 @@ public class MainActivity extends BaseFragmentActivity<MainFragment> implements 
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        prepareSearchView( );
+        return true;
+    }
+
+    private void prepareSearchView( ){
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         if (!Utils.isNullOrEmpty(query)) {
             searchView.setIconified(false);
@@ -51,12 +57,11 @@ public class MainActivity extends BaseFragmentActivity<MainFragment> implements 
             searchView.clearFocus();
         }
         searchView.setOnQueryTextListener(this);
-
-        return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        searchView.clearFocus();
         getCurrentFragment().performSearch(query);
         return false;
     }
