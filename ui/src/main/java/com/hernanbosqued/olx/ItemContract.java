@@ -10,7 +10,7 @@ public class ItemContract {
 
         void setAvatar(String url);
 
-        void showStatus(String text, EntitiesModel.EntityModel[]... entities);
+        void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities);
 
         void setAttachedImage(String mediaUrl);
 

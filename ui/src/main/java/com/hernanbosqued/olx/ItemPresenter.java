@@ -1,12 +1,11 @@
 package com.hernanbosqued.olx;
 
 import android.support.annotation.NonNull;
-import android.text.Html;
-import android.text.Spanned;
 
-import com.hernanbosqued.olx.domain.Utils;
 import com.hernanbosqued.olx.domain.model.MediaEntityModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
+
+import org.apache.commons.lang3.StringUtils;
 
 class ItemPresenter extends BasePresenter<StatusModel, ItemContract.View> {
 
@@ -33,13 +32,16 @@ class ItemPresenter extends BasePresenter<StatusModel, ItemContract.View> {
             status = model;
         }
         view().showHeader(screenName + " " + retweetScreenName);
-        view().showStatus(status.text.substring(status.displayTextRange[0],status.displayTextRange[1]), status.entities.hashtags,status.entities.urls, status.entities.userMentions);
+        view().showStatus(status.text,
+                status.displayTextRange[0],
+                status.displayTextRange[1],
+                status.entities.hashtags,status.entities.urls, status.entities.userMentions);
         setMediaUrl();
     }
 
     private void setMediaUrl() {
         String mediaUrl = getMediaUrl();
-        if (!Utils.isNullOrEmpty(mediaUrl)) {
+        if (!StringUtils.isEmpty(mediaUrl)) {
             view().setAttachedImage(mediaUrl);
         }
     }

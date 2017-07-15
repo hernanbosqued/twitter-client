@@ -25,6 +25,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:recyclerview-v7:25.4.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'org.apache.commons:commons-lang3:3.6'
+
     implementation project(path: ':repo')
     implementation project(path: ':domain')
 }

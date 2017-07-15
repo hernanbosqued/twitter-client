@@ -4,7 +4,7 @@ import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
+import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
@@ -17,13 +17,12 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
-import com.vdurmont.emoji.EmojiLoader;
-import com.vdurmont.emoji.EmojiManager;
 import com.vdurmont.emoji.EmojiParser;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.security.spec.ECField;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.view.View.GONE;
 
@@ -60,21 +59,37 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
     }
 
     @Override
-    public void showStatus(String status, EntitiesModel.EntityModel[]... entities) {
-
-        Spannable spannableStatus = null;
-
-        spannableStatus = new SpannableString( EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
+    public void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities) {
+        final List<EmojiParser.UnicodeCandidate> emojis = new ArrayList<>();
+        String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
             @Override
             public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
-                return "X";
+                emojis.add(unicodeCandidate);
+                return String.valueOf(new char[StringUtils.countMatches(unicodeCandidate.getEmoji().getHtmlHexadecimal(),"&#") + (unicodeCandidate.hasFitzpatrick() ? 1 : 0)]);
             }
-        }) );
+        });
+
+        Spannable spannableStatus = new SpannableString(convertedStatus);
 
         for (EntitiesModel.EntityModel[] item : entities) {
             spannableStatus = spanEntity(spannableStatus, item);
         }
-        this.statusTextView.setText(spannableStatus);
+
+        SpannableStringBuilder sb = new SpannableStringBuilder();
+        int index = 0, offset = 0;
+        for (EmojiParser.UnicodeCandidate emoji : emojis) {
+            sb.append(spannableStatus.subSequence(index - offset, emoji.getEmojiStartIndex() - offset));
+            sb.append(emoji.getEmoji().getUnicode());
+
+            if (emoji.getEmoji().getUnicode().length() > 1) {
+                offset += emoji.getEmoji().getUnicode().length() + (emoji.hasFitzpatrick() ? 1 : 0) - 1;
+            }
+            index = emoji.getEmojiEndIndex();
+        }
+
+        sb.append(spannableStatus.subSequence(index - offset, finishIndex));
+
+        this.statusTextView.setText(sb);
     }
 
 
@@ -83,7 +98,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
             try {
                 spannableStatus.setSpan(new ForegroundColorSpan(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryLight)), item.indices[0], item.indices[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableStatus.setSpan(new StyleSpan(Typeface.BOLD), item.indices[0], item.indices[1], 0);
-            }catch(Exception err){
+            } catch (Exception err) {
                 //some indices are set beyond de status length
             }
         }

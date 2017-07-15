@@ -7,9 +7,8 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import com.hernanbosqued.olx.domain.Utils;
+import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends BaseFragmentActivity<MainFragment> implements MainFragment.Callbacks, SearchView.OnQueryTextListener {
 
@@ -51,7 +50,7 @@ public class MainActivity extends BaseFragmentActivity<MainFragment> implements 
     private void prepareSearchView( ){
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        if (!Utils.isNullOrEmpty(query)) {
+        if (!StringUtils.isEmpty(query)) {
             searchView.setIconified(false);
             searchView.setQuery(query, false);
             searchView.clearFocus();

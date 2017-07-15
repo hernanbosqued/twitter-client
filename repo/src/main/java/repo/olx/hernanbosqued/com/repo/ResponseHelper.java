@@ -15,8 +15,8 @@ class ResponseHelper<T> {
 
     private ErrorModel parseError(ResponseBody responseBody) {
         ErrorsModel response = ServiceGenerator.getInstance().parseResponse(ErrorsModel.class, responseBody);
-        if (response != null) {
-            return response.errorModels.get(0);
+        if (response != null && response.errors != null ){
+            return response.errors.get(0);
         } else {
             return new ErrorModel(CUSTOM_ERROR_CODE, NULL_ERROR_MESSAGE);
         }
