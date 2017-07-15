@@ -17,7 +17,12 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
+import com.vdurmont.emoji.EmojiLoader;
+import com.vdurmont.emoji.EmojiManager;
+import com.vdurmont.emoji.EmojiParser;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.spec.ECField;
 
 import static android.view.View.GONE;
@@ -56,24 +61,33 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
 
     @Override
     public void showStatus(String status, EntitiesModel.EntityModel[]... entities) {
-        Spannable spannableEntity = new SpannableString( status);
+
+        Spannable spannableStatus = null;
+
+        spannableStatus = new SpannableString( EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
+            @Override
+            public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
+                return "X";
+            }
+        }) );
+
         for (EntitiesModel.EntityModel[] item : entities) {
-            spannableEntity = spanEntity(spannableEntity, item);
+            spannableStatus = spanEntity(spannableStatus, item);
         }
-        this.statusTextView.setText(spannableEntity);
+        this.statusTextView.setText(spannableStatus);
     }
 
-    private Spannable spanEntity(CharSequence textToSpan, EntitiesModel.EntityModel[] entity) {
-        Spannable spannable = new SpannableString(textToSpan);
-        for (EntitiesModel.EntityModel entityModel : entity) {
+
+    private Spannable spanEntity(Spannable spannableStatus, EntitiesModel.EntityModel[] entity) {
+        for (EntitiesModel.EntityModel item : entity) {
             try {
-                spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryLight)), entityModel.indices[0], entityModel.indices[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannable.setSpan(new StyleSpan(Typeface.BOLD), entityModel.indices[0], entityModel.indices[1], 0);
+                spannableStatus.setSpan(new ForegroundColorSpan(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryLight)), item.indices[0], item.indices[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableStatus.setSpan(new StyleSpan(Typeface.BOLD), item.indices[0], item.indices[1], 0);
             }catch(Exception err){
                 //some indices are set beyond de status length
             }
         }
-        return spannable;
+        return spannableStatus;
     }
 
     @Override
@@ -126,6 +140,4 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         }
         this.itemView.setBackgroundColor(color);
     }
-
-
 }
