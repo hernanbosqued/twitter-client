@@ -18,7 +18,6 @@ import com.bumptech.glide.request.target.Target;
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
 import com.vdurmont.emoji.EmojiParser;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -76,7 +75,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         }
 
         SpannableStringBuilder sb = new SpannableStringBuilder();
-        int index = 0, offset = 0;
+        int index = startIndex, offset = 0;
         for (EmojiParser.UnicodeCandidate emoji : emojis) {
             sb.append(spannableStatus.subSequence(index - offset, emoji.getEmojiStartIndex() - offset));
             sb.append(emoji.getEmoji().getUnicode());
