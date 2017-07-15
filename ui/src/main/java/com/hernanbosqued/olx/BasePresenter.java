@@ -5,17 +5,17 @@ import android.support.annotation.NonNull;
 import java.lang.ref.WeakReference;
 
 public abstract class BasePresenter<M, V> {
-    protected M model;
+    M model;
     WeakReference<V> view;
 
-    public void setModel(M model) {
+    void setModel(M model) {
         this.model = model;
         if (setupDone()) {
             updateView();
         }
     }
 
-    protected boolean setupDone() {
+    private boolean setupDone() {
         return view != null && model != null;
     }
 
@@ -31,7 +31,7 @@ public abstract class BasePresenter<M, V> {
         }
     }
 
-    public void unbindView() {
+    void unbindView() {
         this.view = null;
     }
 

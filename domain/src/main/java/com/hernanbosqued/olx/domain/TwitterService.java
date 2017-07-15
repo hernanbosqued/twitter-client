@@ -1,5 +1,9 @@
 package com.hernanbosqued.olx.domain;
 
+import com.hernanbosqued.olx.domain.model.ErrorModel;
+import com.hernanbosqued.olx.domain.model.StatusModel;
+import com.hernanbosqued.olx.domain.model.TwitterModel;
+
 import java.util.List;
 
 public class TwitterService {
@@ -10,7 +14,7 @@ public class TwitterService {
     }
 
     public interface Callbacks {
-        void onStatusesReceived( List<TwitterModel.StatusModel> model );
+        void onStatusesReceived( List<StatusModel> model );
         void onServiceError(String error );
     }
 
@@ -22,8 +26,8 @@ public class TwitterService {
             }
 
             @Override
-            public void onFail(ErrorModel.Error error) {
-                callbacks.onServiceError(error.message);
+            public void onFail(ErrorModel errorModel) {
+                callbacks.onServiceError(errorModel.message);
             }
         });
     }

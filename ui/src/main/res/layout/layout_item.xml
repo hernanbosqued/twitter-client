@@ -14,25 +14,37 @@
         android:layout_height="@dimen/avatar_size"
         android:adjustViewBounds="true" />
 
+    <TextView
+        android:id="@+id/header"
+        style="@style/titleStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin8"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:includeFontPadding="false" />
+
     <LinearLayout
         android:id="@+id/frame_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/header">
 
         <TextView
-            android:id="@+id/text"
-            style="@style/itemStyle"
+            android:id="@+id/status"
+            style="@style/statusStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:includeFontPadding="false" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ProgressBar

@@ -1,12 +1,12 @@
 package com.hernanbosqued.olx;
 
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.StatusModel;
 
 import java.util.List;
 
 public class MainContract {
     public interface View {
-        void showItems(List<TwitterModel.StatusModel> model);
+        void showItems(List<StatusModel> model);
         void showMessage(String message);
         void showProgress();
         void hideProgress();

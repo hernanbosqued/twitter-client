@@ -1,7 +1,7 @@
 package repo.olx.hernanbosqued.com.repo;
 
-import com.hernanbosqued.olx.domain.TokenModel;
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.TokenModel;
+import com.hernanbosqued.olx.domain.model.TwitterModel;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;

@@ -3,7 +3,6 @@ package repo.olx.hernanbosqued.com.repo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hernanbosqued.olx.domain.ErrorModel;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -45,7 +44,7 @@ class ServiceGenerator {
         Converter<ResponseBody, T> responseBodyObjectConverter = retrofit.responseBodyConverter(type, new Annotation[0]);
         try {
             return responseBodyObjectConverter.convert(responseBody);
-        } catch (IOException err) {
+        } catch (Exception err) {
             return null;
         }
     }

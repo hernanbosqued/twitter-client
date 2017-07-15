@@ -2,14 +2,14 @@ package com.hernanbosqued.olx;
 
 import android.support.annotation.NonNull;
 
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.StatusModel;
 import com.hernanbosqued.olx.domain.TwitterService;
 
 import java.util.List;
 
 import repo.olx.hernanbosqued.com.repo.TwitterRepositotyImpl;
 
-public class MainPresenter extends BasePresenter<List<TwitterModel.StatusModel>, MainContract.View> implements TwitterService.Callbacks, MainContract.Presenter {
+public class MainPresenter extends BasePresenter<List<StatusModel>, MainContract.View> implements TwitterService.Callbacks, MainContract.Presenter {
 
     private TwitterService service;
     private boolean isLoading;
@@ -27,7 +27,7 @@ public class MainPresenter extends BasePresenter<List<TwitterModel.StatusModel>,
     }
 
     @Override
-    public void onStatusesReceived(List<TwitterModel.StatusModel> statuses) {
+    public void onStatusesReceived(List<StatusModel> statuses) {
         isLoading = false;
         setModel(statuses);
         view().hideProgress();

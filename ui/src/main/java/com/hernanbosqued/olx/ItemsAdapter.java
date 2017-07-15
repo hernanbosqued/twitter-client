@@ -4,29 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.StatusModel;
 
-class ItemsAdapter extends BaseAdapter<TwitterModel.StatusModel, ItemViewHolder> {
-
-    enum ITEM_TYPE {
-        ROW_EVEN(0),
-        ROW_ODD(1);
-
-        private int itemType;
-
-        ITEM_TYPE(int itemType) {
-            this.itemType = itemType;
-        }
-
-        public static ITEM_TYPE valueOf(int itemType) {
-            for (ITEM_TYPE item : ITEM_TYPE.values()) {
-                if (item.itemType == itemType) {
-                    return item;
-                }
-            }
-            return ROW_EVEN;
-        }
-    }
+class ItemsAdapter extends BaseAdapter<StatusModel, ItemViewHolder> {
 
     @Override
     public int getItemViewType(int position) {

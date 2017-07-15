@@ -5,19 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 
-public abstract class BaseAdapter<M,VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseAdapter<M,VH extends BaseViewHolder<M>> extends RecyclerView.Adapter<VH> {
 
-    protected List<M> entities;
+    private List<M> entities;
 
     public void setData( List<M> entities){
         this.entities = entities;
         notifyDataSetChanged();
     }
-
-    public boolean hasData( ){
-        return entities != null;
-    }
-
 
     @Override
     public void onBindViewHolder(VH holder, int position) {

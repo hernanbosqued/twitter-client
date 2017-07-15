@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.StatusModel;
 
 import java.util.List;
 
@@ -83,7 +83,7 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
     }
 
     @Override
-    public void showItems(List<TwitterModel.StatusModel> items) {
+    public void showItems(List<StatusModel> items) {
         adapter.setData(items);
     }
 

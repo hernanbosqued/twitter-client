@@ -1,13 +1,19 @@
 package com.hernanbosqued.olx;
 
-import com.hernanbosqued.olx.domain.TwitterModel;
-
-import java.util.List;
+import com.hernanbosqued.olx.domain.model.EntitiesModel;
 
 public class ItemContract {
     public interface View {
-    }
+        void setBackground();
 
-    public interface Presenter {
+        void initViews();
+
+        void setAvatar(String url);
+
+        void showStatus(String text, EntitiesModel.EntityModel[]... entities);
+
+        void setAttachedImage(String mediaUrl);
+
+        void showHeader(String header);
     }
 }

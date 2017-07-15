@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.util.Base64;
 
 import com.hernanbosqued.olx.domain.ModelCallbacks;
-import com.hernanbosqued.olx.domain.ErrorModel;
-import com.hernanbosqued.olx.domain.TokenModel;
-import com.hernanbosqued.olx.domain.TwitterModel;
+import com.hernanbosqued.olx.domain.model.ErrorModel;
+import com.hernanbosqued.olx.domain.model.TokenModel;
+import com.hernanbosqued.olx.domain.model.TwitterModel;
 import com.hernanbosqued.olx.domain.TwitterRepository;
 
 import okhttp3.MediaType;
@@ -56,7 +56,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
 
             @Override
             public void onFailure(@NonNull Call<TokenModel> call, @NonNull Throwable t) {
-                callback.onFail(new ErrorModel.Error(-1, t.getMessage()));
+                callback.onFail(new ErrorModel(-1, t.getMessage()));
             }
         });
     }
@@ -73,8 +73,8 @@ public class TwitterRepositotyImpl implements TwitterRepository {
                 }
 
                 @Override
-                public void onFail(ErrorModel.Error error) {
-                    modelCallback.onFail(error);
+                public void onFail(ErrorModel errorModel) {
+                    modelCallback.onFail(errorModel);
                 }
             });
         }
@@ -93,7 +93,7 @@ public class TwitterRepositotyImpl implements TwitterRepository {
 
                     @Override
                     public void onFailure(@NonNull Call<TwitterModel> call, @NonNull Throwable t) {
-                        callback.onFail(new ErrorModel.Error(CUSTOM_ERROR_CODE, t.getMessage()));
+                        callback.onFail(new ErrorModel(CUSTOM_ERROR_CODE, t.getMessage()));
                     }
                 });
             }
