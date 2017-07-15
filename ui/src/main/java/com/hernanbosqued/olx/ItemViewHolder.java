@@ -18,7 +18,6 @@ import com.bumptech.glide.request.target.Target;
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
 import com.vdurmont.emoji.EmojiParser;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,14 +56,21 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         progressbar.setVisibility(GONE);
     }
 
+    private int getUnicodeLength( EmojiParser.UnicodeCandidate unicode){
+        return unicode.getEmoji().getUnicode().length()/2 + (unicode.hasFitzpatrick() ? 1 : 0);
+    }
     @Override
     public void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities) {
         final List<EmojiParser.UnicodeCandidate> emojis = new ArrayList<>();
         String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
             @Override
             public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
-                emojis.add(unicodeCandidate);
-                return String.valueOf(new char[StringUtils.countMatches(unicodeCandidate.getEmoji().getHtmlHexadecimal(),"&#") + (unicodeCandidate.hasFitzpatrick() ? 1 : 0)]);
+                int unicodeLength = getUnicodeLength(unicodeCandidate);
+                if( unicodeLength > 1) {
+                    emojis.add(unicodeCandidate);
+                    return String.valueOf(new char[unicodeLength]);
+                }
+                return unicodeCandidate.getEmoji().getUnicode();
             }
         });
 
@@ -81,7 +87,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
             sb.append(emoji.getEmoji().getUnicode());
 
             if (emoji.getEmoji().getUnicode().length() > 1) {
-                offset += emoji.getEmoji().getUnicode().length() + (emoji.hasFitzpatrick() ? 1 : 0) - 1;
+                offset += getUnicodeLength(emoji);
             }
             index = emoji.getEmojiEndIndex();
         }
@@ -90,7 +96,6 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
 
         this.statusTextView.setText(sb);
     }
-
 
     private Spannable spanEntity(Spannable spannableStatus, EntitiesModel.EntityModel[] entity) {
         for (EntitiesModel.EntityModel item : entity) {

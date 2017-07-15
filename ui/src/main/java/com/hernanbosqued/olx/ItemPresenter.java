@@ -2,10 +2,9 @@ package com.hernanbosqued.olx;
 
 import android.support.annotation.NonNull;
 
+import com.hernanbosqued.olx.domain.Utils;
 import com.hernanbosqued.olx.domain.model.MediaEntityModel;
 import com.hernanbosqued.olx.domain.model.StatusModel;
-
-import org.apache.commons.lang3.StringUtils;
 
 class ItemPresenter extends BasePresenter<StatusModel, ItemContract.View> {
 
@@ -41,7 +40,7 @@ class ItemPresenter extends BasePresenter<StatusModel, ItemContract.View> {
 
     private void setMediaUrl() {
         String mediaUrl = getMediaUrl();
-        if (!StringUtils.isEmpty(mediaUrl)) {
+        if (!Utils.isNullOrEmpty(mediaUrl)) {
             view().setAttachedImage(mediaUrl);
         }
     }
