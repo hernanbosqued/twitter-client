@@ -56,19 +56,20 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         progressbar.setVisibility(GONE);
     }
 
-    private int getUnicodeLength( EmojiParser.UnicodeCandidate unicode){
-        return unicode.getEmoji().getUnicode().length()/2 + (unicode.hasFitzpatrick() ? 1 : 0);
+    private int unicodeLength(EmojiParser.UnicodeCandidate unicode) {
+        return unicode.getEmoji().getUnicode().length() + (unicode.hasFitzpatrick() ? 2 : 0);
     }
+
     @Override
     public void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities) {
         final List<EmojiParser.UnicodeCandidate> emojis = new ArrayList<>();
         String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
             @Override
             public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
-                int unicodeLength = getUnicodeLength(unicodeCandidate);
-                if( unicodeLength > 1) {
+                int unicodeLength = unicodeLength(unicodeCandidate);
+                if (unicodeLength > 1) {
                     emojis.add(unicodeCandidate);
-                    return String.valueOf(new char[unicodeLength]);
+                    return String.valueOf(new char[unicodeLength/2]);
                 }
                 return unicodeCandidate.getEmoji().getUnicode();
             }
@@ -87,7 +88,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
             sb.append(emoji.getEmoji().getUnicode());
 
             if (emoji.getEmoji().getUnicode().length() > 1) {
-                offset += getUnicodeLength(emoji);
+                offset += unicodeLength(emoji) - 1;
             }
             index = emoji.getEmojiEndIndex();
         }
@@ -99,12 +100,8 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
 
     private Spannable spanEntity(Spannable spannableStatus, EntitiesModel.EntityModel[] entity) {
         for (EntitiesModel.EntityModel item : entity) {
-            try {
-                spannableStatus.setSpan(new ForegroundColorSpan(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryLight)), item.indices[0], item.indices[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannableStatus.setSpan(new StyleSpan(Typeface.BOLD), item.indices[0], item.indices[1], 0);
-            } catch (Exception err) {
-                //some indices are set beyond de status length
-            }
+            spannableStatus.setSpan(new ForegroundColorSpan(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryLight)), item.indices[0], item.indices[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableStatus.setSpan(new StyleSpan(Typeface.BOLD), item.indices[0], item.indices[1], 0);
         }
         return spannableStatus;
     }
