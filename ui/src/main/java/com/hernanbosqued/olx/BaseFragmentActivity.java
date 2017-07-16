@@ -33,7 +33,7 @@ public abstract class BaseFragmentActivity<F extends Fragment> extends AppCompat
         }
     }
 
-    protected void initFragment() {
+    private void initFragment() {
         replaceContent(getFragment(), false, FRAGMENT_TAG);
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseFragmentActivity<F extends Fragment> extends AppCompat
     }
 
     @SuppressWarnings("unchecked")
-    protected F getCurrentFragment() {
+    F getCurrentFragment() {
         F fragment;
         try {
             fragment = (F) getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
@@ -60,7 +60,7 @@ public abstract class BaseFragmentActivity<F extends Fragment> extends AppCompat
         return fragment;
     }
 
-    protected void replaceContent(F fragment, boolean addToBackStack, String tag) {
+    private void replaceContent(F fragment, boolean addToBackStack, String tag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer, fragment, tag);
         if (addToBackStack) {

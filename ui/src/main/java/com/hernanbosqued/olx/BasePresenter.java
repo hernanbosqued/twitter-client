@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 
-public abstract class BasePresenter<M, V> {
+abstract class BasePresenter<M, V> {
     M model;
-    WeakReference<V> view;
+    private WeakReference<V> view;
 
     void setModel(M model) {
         this.model = model;
@@ -19,11 +19,11 @@ public abstract class BasePresenter<M, V> {
         return view != null && model != null;
     }
 
-    public void bindView(@NonNull V view) {
+    void bindView(@NonNull V view) {
         this.view = new WeakReference<>(view);
     }
 
-    protected V view() {
+    V view() {
         if (view == null) {
             return null;
         } else {

@@ -3,6 +3,7 @@ package com.hernanbosqued.olx;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+@SuppressWarnings("unused")
 abstract class BaseFragment<T> extends Fragment {
     protected T callbacks;
 

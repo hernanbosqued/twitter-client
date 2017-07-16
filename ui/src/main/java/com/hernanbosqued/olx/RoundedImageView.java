@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 public class RoundedImageView extends android.support.v7.widget.AppCompatImageView {
     private static final float BORDER_WIDTH_PROPORTIONAL_MULTIPLIER = .05f;
     private final Path path;
-    private RectF rect;
+    private final RectF rect;
 
     public RoundedImageView(Context context, AttributeSet attrs) {
         super(context, attrs);

@@ -12,7 +12,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface TwitterService {
+interface TwitterService {
 
     @Headers({"grant_type: client_credentials,", "Content-Type: application/x-www-form-urlencoded;charset=UTF-8"})
     @POST("oauth2/token")

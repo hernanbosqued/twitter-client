@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class DividerItemDecoration extends RecyclerView.ItemDecoration {
-    private Drawable mDivider;
+class DividerItemDecoration extends RecyclerView.ItemDecoration {
+    private final Drawable mDivider;
 
     public DividerItemDecoration(Context context) {
         mDivider = context.getResources().getDrawable(R.drawable.divider);

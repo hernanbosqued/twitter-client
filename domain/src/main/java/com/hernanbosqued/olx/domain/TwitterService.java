@@ -7,7 +7,7 @@ import com.hernanbosqued.olx.domain.model.TwitterModel;
 import java.util.List;
 
 public class TwitterService {
-    private TwitterRepository repo;
+    private final TwitterRepository repo;
 
     public TwitterService(TwitterRepository repo){
         this.repo = repo;

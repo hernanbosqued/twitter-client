@@ -21,7 +21,7 @@ import static repo.olx.hernanbosqued.com.repo.Constants.*;
 
 public class TwitterRepositotyImpl implements TwitterRepository {
     private TokenModel token;
-    private TwitterService service;
+    private final TwitterService service;
 
     private static TwitterRepositotyImpl instance;
 

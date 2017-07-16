@@ -4,7 +4,7 @@ import com.hernanbosqued.olx.domain.model.StatusModel;
 
 import java.util.List;
 
-public class MainContract {
+class MainContract {
     public interface View {
         void showItems(List<StatusModel> model);
         void showMessage(String message);
@@ -15,6 +15,7 @@ public class MainContract {
         void scrollToTop();
     }
 
+    @SuppressWarnings("unused")
     public interface Presenter {
         void processQuery(String query);
     }

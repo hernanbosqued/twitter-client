@@ -2,6 +2,7 @@ package com.hernanbosqued.olx.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class StatusModel {
 
     @SerializedName("full_text")

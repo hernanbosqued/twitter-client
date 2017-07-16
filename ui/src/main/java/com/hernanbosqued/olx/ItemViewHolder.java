@@ -27,11 +27,11 @@ import static android.view.View.GONE;
 public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemContract.View {
     private final TextView headerTextView;
     private View progressbar;
-    private ItemPresenter presenter;
-    private TextView statusTextView;
-    private ImageView attachedImageView;
-    private ImageView avatarImageView;
-    private ITEM_TYPE itemType;
+    private final ItemPresenter presenter;
+    private final TextView statusTextView;
+    private final ImageView attachedImageView;
+    private final ImageView avatarImageView;
+    private final ITEM_TYPE itemType;
 
     ItemViewHolder(View view, ITEM_TYPE itemType) {
         super(view);
@@ -56,7 +56,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         progressbar.setVisibility(GONE);
     }
 
-    private int unicodeLength(EmojiParser.UnicodeCandidate unicode) {
+    private int getUnicodeLength(EmojiParser.UnicodeCandidate unicode) {
         return unicode.getEmoji().getUnicode().length() + (unicode.hasFitzpatrick() ? 2 : 0);
     }
 
@@ -66,7 +66,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
         String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
             @Override
             public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
-                int unicodeLength = unicodeLength(unicodeCandidate);
+                int unicodeLength = getUnicodeLength(unicodeCandidate);
                 if (unicodeLength > 1) {
                     emojis.add(unicodeCandidate);
                     return String.valueOf(new char[unicodeLength/2]);
@@ -88,7 +88,7 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
             sb.append(emoji.getEmoji().getUnicode());
 
             if (emoji.getEmoji().getUnicode().length() > 1) {
-                offset += unicodeLength(emoji) - 1;
+                offset += getUnicodeLength(emoji) - 1;
             }
             index = emoji.getEmojiEndIndex();
         }

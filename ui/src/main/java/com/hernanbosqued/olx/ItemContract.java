@@ -2,7 +2,7 @@ package com.hernanbosqued.olx;
 
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 
-public class ItemContract {
+class ItemContract {
     public interface View {
         void setBackground();
 

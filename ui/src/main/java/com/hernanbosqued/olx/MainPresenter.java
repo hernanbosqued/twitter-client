@@ -11,7 +11,7 @@ import repo.olx.hernanbosqued.com.repo.TwitterRepositotyImpl;
 
 public class MainPresenter extends BasePresenter<List<StatusModel>, MainContract.View> implements TwitterService.Callbacks, MainContract.Presenter {
 
-    private TwitterService service;
+    private final TwitterService service;
     private boolean isLoading;
     private boolean isEmpty;
 

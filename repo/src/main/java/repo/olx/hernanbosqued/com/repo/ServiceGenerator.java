@@ -4,7 +4,6 @@ package repo.olx.hernanbosqued.com.repo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 
 import okhttp3.OkHttpClient;
@@ -17,7 +16,7 @@ import static repo.olx.hernanbosqued.com.repo.Constants.BASE_API;
 
 class ServiceGenerator {
     private static ServiceGenerator instance;
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
     private ServiceGenerator() {
         Gson gson = new GsonBuilder().setLenient().create();
