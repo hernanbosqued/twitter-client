@@ -143,6 +143,11 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
     }
 
     @Override
+    public String getString(int resource) {
+        return itemView.getContext().getString(resource);
+    }
+
+    @Override
     public void setBackground() {
         int color;
         switch (itemType) {

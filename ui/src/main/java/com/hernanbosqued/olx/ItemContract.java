@@ -15,5 +15,7 @@ class ItemContract {
         void setAttachedImage(String mediaUrl);
 
         void showHeader(String header);
+
+        String getString(int resource);
     }
 }
