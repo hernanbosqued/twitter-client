@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search">Buscar</string>
+    <string name="from">desde</string>
     <string name="no_results_found">No se encontraron resultados</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.hernanbosqued.olx;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.hernanbosqued.olx.domain.Utils;
@@ -25,7 +26,7 @@ class ItemPresenter extends BasePresenter<StatusModel, ItemContract.View> {
         String screenName = "@" + model.user.screenName;
         String retweetScreenName = "";
         if (model.retweetedStatus != null) {
-            retweetScreenName = "RT from @" + model.retweetedStatus.user.screenName;
+            retweetScreenName = "RT"+ ((Context)view()).getString(R.string.from)+" @" + model.retweetedStatus.user.screenName;
         }
         return screenName + " " + retweetScreenName;
     }
