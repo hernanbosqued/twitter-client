@@ -1,6 +1,7 @@
 package com.hernanbosqued.olx;
 
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -61,41 +62,45 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
     }
 
     @Override
-    public void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities) {
+    public void showStatus(@NonNull String status, int startIndex, int finishIndex, @NonNull EntitiesModel.EntityModel[]... entities) {
         final List<EmojiParser.UnicodeCandidate> emojis = new ArrayList<>();
-        String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
-            @Override
-            public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
-                int unicodeLength = getUnicodeLength(unicodeCandidate);
-                if (unicodeLength > 1) {
-                    emojis.add(unicodeCandidate);
-                    return String.valueOf(new char[unicodeLength/2]);
+        try {
+            String convertedStatus = EmojiParser.parseFromUnicode(status, new EmojiParser.EmojiTransformer() {
+                @Override
+                public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
+                    int unicodeLength = getUnicodeLength(unicodeCandidate);
+                    if (unicodeLength > 1) {
+                        emojis.add(unicodeCandidate);
+                        return String.valueOf(new char[(unicodeLength / 2)]);
+                    }
+                    return unicodeCandidate.getEmoji().getUnicode();
                 }
-                return unicodeCandidate.getEmoji().getUnicode();
+            });
+
+            Spannable spannableStatus = new SpannableString(convertedStatus);
+
+            for (EntitiesModel.EntityModel[] item : entities) {
+                spannableStatus = spanEntity(spannableStatus, item);
             }
-        });
 
-        Spannable spannableStatus = new SpannableString(convertedStatus);
+            SpannableStringBuilder sb = new SpannableStringBuilder();
+            int index = startIndex, offset = 0;
+            for (EmojiParser.UnicodeCandidate emoji : emojis) {
+                sb.append(spannableStatus.subSequence(index - offset, emoji.getEmojiStartIndex() - offset));
+                sb.append(emoji.getEmoji().getUnicode());
 
-        for (EntitiesModel.EntityModel[] item : entities) {
-            spannableStatus = spanEntity(spannableStatus, item);
-        }
-
-        SpannableStringBuilder sb = new SpannableStringBuilder();
-        int index = startIndex, offset = 0;
-        for (EmojiParser.UnicodeCandidate emoji : emojis) {
-            sb.append(spannableStatus.subSequence(index - offset, emoji.getEmojiStartIndex() - offset));
-            sb.append(emoji.getEmoji().getUnicode());
-
-            if (emoji.getEmoji().getUnicode().length() > 1) {
-                offset += getUnicodeLength(emoji) - 1;
+                if (emoji.getEmoji().getUnicode().length() > 1) {
+                    offset += getUnicodeLength(emoji) - 1;
+                }
+                index = emoji.getEmojiEndIndex();
             }
-            index = emoji.getEmojiEndIndex();
+
+            sb.append(spannableStatus.subSequence(index - offset, finishIndex));
+
+            this.statusTextView.setText(sb);
+        } catch (Exception err) {
+            this.statusTextView.setText(status);
         }
-
-        sb.append(spannableStatus.subSequence(index - offset, finishIndex));
-
-        this.statusTextView.setText(sb);
     }
 
     private Spannable spanEntity(Spannable spannableStatus, EntitiesModel.EntityModel[] entity) {

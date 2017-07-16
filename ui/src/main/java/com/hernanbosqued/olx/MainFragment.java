@@ -34,6 +34,7 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
     public void onResume() {
         super.onResume();
         presenter.bindView(this);
+        presenter.processQuery("#coke #loser #gaper");
     }
 
     @Override
