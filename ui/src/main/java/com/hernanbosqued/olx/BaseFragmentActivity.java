@@ -1,6 +1,7 @@
 package com.hernanbosqued.olx;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,7 @@ public abstract class BaseFragmentActivity<F extends Fragment> extends AppCompat
         return fragment;
     }
 
-    private void replaceContent(F fragment, boolean addToBackStack, String tag) {
+    private void replaceContent(@NonNull F fragment, boolean addToBackStack, String tag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer, fragment, tag);
         if (addToBackStack) {

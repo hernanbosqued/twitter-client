@@ -1,6 +1,7 @@
 package com.hernanbosqued.olx;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 @SuppressWarnings("unused")
@@ -11,7 +12,7 @@ abstract class BaseFragment<T> extends Fragment {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void onAttach(Context context) {
+    public void onAttach( @NonNull  Context context) {
         super.onAttach(context);
         try {
             callbacks = (T) context;

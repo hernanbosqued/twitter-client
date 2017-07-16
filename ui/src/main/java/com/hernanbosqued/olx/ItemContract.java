@@ -1,5 +1,7 @@
 package com.hernanbosqued.olx;
 
+import android.support.annotation.NonNull;
+
 import com.hernanbosqued.olx.domain.model.EntitiesModel;
 
 class ItemContract {
@@ -8,13 +10,13 @@ class ItemContract {
 
         void initViews();
 
-        void setAvatar(String url);
+        void setAvatar(@NonNull String url);
 
-        void showStatus(String status, int startIndex, int finishIndex, EntitiesModel.EntityModel[]... entities);
+        void showStatus(@NonNull String status, int startIndex, int finishIndex, @NonNull EntitiesModel.EntityModel[]... entities);
 
-        void setAttachedImage(String mediaUrl);
+        void setAttachedImage(@NonNull String mediaUrl);
 
-        void showHeader(String header);
+        void showHeader(@NonNull String header);
 
         String getString(int resource);
     }

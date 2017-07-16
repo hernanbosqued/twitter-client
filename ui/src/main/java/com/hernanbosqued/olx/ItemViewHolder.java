@@ -45,8 +45,8 @@ public class ItemViewHolder extends BaseViewHolder<StatusModel> implements ItemC
     }
 
     @Override
-    public void bind(final StatusModel item) {
-        presenter.bind(this, item);
+    public void bind(final StatusModel model) {
+        presenter.bind(this, model);
     }
 
     @Override

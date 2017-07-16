@@ -20,14 +20,14 @@ public class MainPresenter extends BasePresenter<List<StatusModel>, MainContract
     }
 
     @Override
-    public void processQuery(String query) {
+    public void processQuery(@NonNull String query) {
         isLoading = true;
         view().showProgress();
         service.getTweets(query, this);
     }
 
     @Override
-    public void onStatusesReceived(List<StatusModel> statuses) {
+    public void onStatusesReceived(@NonNull List<StatusModel> statuses) {
         isLoading = false;
         setModel(statuses);
         view().hideProgress();
@@ -43,7 +43,7 @@ public class MainPresenter extends BasePresenter<List<StatusModel>, MainContract
     }
 
     @Override
-    public void onServiceError(String error) {
+    public void onServiceError(@NonNull String error) {
         isLoading = false;
         view().showMessage(error);
         view().hideProgress();

@@ -2,6 +2,7 @@ package com.hernanbosqued.olx;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,11 +59,11 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
         prepareEmptyView(view);
     }
 
-    private void prepareEmptyView(View view) {
+    private void prepareEmptyView(@NonNull View view) {
         emptyView = view.findViewById(R.id.empty_view);
     }
 
-    private void prepareRecyclerView(View view) {
+    private void prepareRecyclerView(@NonNull View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setAutoMeasureEnabled(true);
@@ -78,7 +79,7 @@ public class MainFragment extends BaseFragment<MainFragment.Callbacks> implement
         dialog.setContentView(R.layout.progress_dialog);
     }
 
-    public void performSearch(String query) {
+    public void performSearch(@NonNull String query) {
         presenter.processQuery(query);
     }
 

@@ -1,13 +1,15 @@
 package com.hernanbosqued.olx;
 
+import android.support.annotation.NonNull;
+
 import com.hernanbosqued.olx.domain.model.StatusModel;
 
 import java.util.List;
 
 class MainContract {
     public interface View {
-        void showItems(List<StatusModel> model);
-        void showMessage(String message);
+        void showItems(@NonNull List<StatusModel> model);
+        void showMessage(@NonNull String message);
         void showProgress();
         void hideProgress();
         void showEmpty();
@@ -17,6 +19,6 @@ class MainContract {
 
     @SuppressWarnings("unused")
     public interface Presenter {
-        void processQuery(String query);
+        void processQuery(@NonNull String query);
     }
 }

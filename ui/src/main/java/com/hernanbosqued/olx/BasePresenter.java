@@ -8,7 +8,7 @@ abstract class BasePresenter<M, V> {
     M model;
     private WeakReference<V> view;
 
-    void setModel(M model) {
+    void setModel(@NonNull M model) {
         this.model = model;
         if (setupDone()) {
             updateView();
