@@ -1,0 +1,11 @@
+things i would fix
+
+-The background colour of the menu items of the ActionBar
+-The communications between the API and the client are not encrypted (I could saw it with a proxy)
+
+things i would improbe
+
+-A calification feature for the users
+-Special two-column size publications
+-The possibility of swipe the publication pictures in without going to another activity
+-The posibility to the user of report suspictious publications
