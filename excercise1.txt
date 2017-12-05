@@ -7,5 +7,5 @@ things i would improbe
 
 -A calification feature for the users
 -Special two-column size publications
--The possibility of swipe the publication pictures in without going to another activity
+-The possibility of swipe the publication pictures without going to another activity
 -The posibility to the user of report suspictious publications
