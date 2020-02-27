@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/margin5"
     android:paddingTop="@dimen/margin8">
 
-    <com.hernanbosqued.olx.RoundedImageView
+    <com.hernanbosqued.twitter_client.RoundedImageView
         android:id="@+id/avatar"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
@@ -54,7 +54,7 @@
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
 
-            <com.hernanbosqued.olx.RoundedImageView
+            <com.hernanbosqued.twitter_client.RoundedImageView
                 android:id="@+id/attached"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/attached_height"
